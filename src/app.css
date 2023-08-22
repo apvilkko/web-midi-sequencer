@@ -64,6 +64,11 @@ button:focus-visible {
   }
 }
 
+select, input {
+  font-size: 1rem;
+  padding: 0.3rem;
+}
+
 #app {
   padding: 1rem;
 }
@@ -72,9 +77,16 @@ button:focus-visible {
   margin: 1rem;
 }
 
-.grid td {
+.row {
+  display: flex;
+}
+
+.cell {
+  font-size: 2vw;
+  align-self: center;
   border: 1px solid #666;
-  width: 2em;
+  width: 5vw;
+  min-width: 5vw;
   height: 2em;
   cursor: pointer;
 }

@@ -6,6 +6,7 @@
   import { max, min } from './util'
 
   export let pattern: Pattern
+  export let trackId: number
 
   type CellItem = { velocity: number; id: number }
   let displayData: Array<Array<CellItem>>
@@ -46,23 +47,24 @@
   }
 
   const handleClick = (i, j) => {
+    const track = seqStore.tracks.find((x) => x.id === trackId)
     if (typeof displayData[j][i] === 'undefined') {
-      seqStore.pattern.addEvent(note(i, j))
+      track.pattern.addEvent(note(i, j))
     } else {
-      seqStore.pattern.removeEvent(displayData[j][i].id)
+      track.pattern.removeEvent(displayData[j][i].id)
     }
     updateInternals()
   }
 </script>
 
-<table class="grid">
+<div class="grid">
   {#each displayData as line, j}
-    <tr>
+    <div class="row">
       {#each line as cell, i}
-        <td on:click={() => handleClick(i, j)}
-          >{cell?.velocity ? cell.velocity : ''}</td
-        >
+        <div class="cell" on:click={() => handleClick(i, j)}>
+          {cell?.velocity ? cell.velocity : ''}
+        </div>
       {/each}
-    </tr>
+    </div>
   {/each}
-</table>
+</div>

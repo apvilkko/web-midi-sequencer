@@ -13,6 +13,12 @@ export const note = (i: number, note: number) => ({
   velocity: 127,
 })
 
+const comparer = (a: MusicalEvent, b: MusicalEvent) => {
+  if (a.offset < b.offset) return -1
+  if (a.offset > b.offset) return 1
+  return 0
+}
+
 export const off = (event: Partial<MusicalEvent>): MusicalEvent =>
   ({
     ...event,
@@ -35,6 +41,7 @@ export class Pattern {
     if (event.type === EventType.NOTE_ON) {
       this.events.push(off(event))
     }
+    this.events.sort(comparer)
   }
 
   removeEvent(id: number) {
