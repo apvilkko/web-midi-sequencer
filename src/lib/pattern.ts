@@ -1,5 +1,5 @@
-import { C1, NOTE_OFF, NOTE_ON, PPQN } from "./constants"
-import { EventType, type MusicalEvent } from "./types"
+import { C1, NOTE_OFF, NOTE_ON, PPQN } from './constants'
+import { EventType, type MusicalEvent } from './types'
 
 let i = 1
 const genId = () => {

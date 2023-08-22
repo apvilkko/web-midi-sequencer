@@ -1,9 +1,9 @@
 <script lang="ts">
-  import PatternDisplay from "./lib/PatternDisplay.svelte"
-  import { PPQN } from "./lib/constants"
-  import { init } from "./lib/midi"
-  import { Pattern, note } from "./lib/pattern"
-  import { start, play as playS, setPattern } from "./lib/sequencer"
+  import PatternDisplay from './lib/PatternDisplay.svelte'
+  import { PPQN } from './lib/constants'
+  import { init } from './lib/midi'
+  import { Pattern, note } from './lib/pattern'
+  import { start, play as playS, setPattern } from './lib/sequencer'
 
   const pattern = new Pattern(PPQN * 4)
   for (let i = 0; i < 16; ++i) {

@@ -6,7 +6,7 @@ const store: { midi: MIDIAccess; inputs: MIDIInput[]; outputs: MIDIOutput[] } =
 export const init = (): Promise<void> =>
   new Promise((resolve, reject) => {
     const onMIDISuccess = (midiAccess: MIDIAccess) => {
-      console.log("MIDI ready!")
+      console.log('MIDI ready!')
       store.midi = midiAccess
 
       getInputsAndOutputs()

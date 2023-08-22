@@ -1,7 +1,7 @@
-import { NOTE_OFF, NOTE_ON, PPQN } from "./constants"
-import { send } from "./midi"
-import type { Pattern } from "./pattern"
-import { EventType } from "./types"
+import { NOTE_OFF, NOTE_ON, PPQN } from './constants'
+import { send } from './midi'
+import type { Pattern } from './pattern'
+import { EventType } from './types'
 
 export const store: {
   playing: boolean
@@ -27,7 +27,7 @@ export const play = () => {
   } else {
     store.playing = false
   }
-  console.log("playing", store.playing)
+  console.log('playing', store.playing)
 }
 
 export const setPattern = (pattern: Pattern) => {
