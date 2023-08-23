@@ -1,16 +1,21 @@
+import { get } from 'svelte/store'
 import { NOTE_OFF, NOTE_ON, PPQN, SCHEDULER_LOOKAHEAD } from './constants'
 import { send } from './midi'
-import type { Track } from './track'
+import { Pattern } from './pattern'
+import { signalStore } from './signalStore'
+import { Track } from './track'
 import { EventType, type MusicalEvent } from './types'
 import { startWorker } from './worker'
 
-export const store: {
+export type Sequencer = {
   playing: boolean
   context: AudioContext
   tempo: number
   position: number
   tracks: Track[]
-} = {
+}
+
+export const store: Sequencer = {
   playing: false,
   context: undefined,
   tempo: 120,
@@ -28,6 +33,20 @@ export const play = () => {
     store.playing = false
   }
   console.log('playing', store.playing)
+}
+
+export const addTrack = () => {
+  console.log('addTrack')
+  const track = new Track()
+  const pattern = new Pattern(
+    store.tracks[store.tracks.length - 1]?.pattern?.length ?? PPQN * 4
+  )
+  track.pattern = pattern
+  store.tracks.push(track)
+  signalStore.update((old) => ({
+    ...old,
+    tracksChanged: old.tracksChanged + 1,
+  }))
 }
 
 export const setTracks = (tracks: Track[]) => {

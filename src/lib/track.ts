@@ -1,5 +1,6 @@
 import type { Pattern } from './pattern'
-import { addRule, store as midiStore } from './midi'
+import { addRule, getChannel } from './midi'
+import { Context } from './context'
 
 let id = 1
 const getId = () => id++
@@ -14,6 +15,7 @@ export class Track {
   pattern: Pattern
   private output: MIDIOutput | undefined
   private input: MIDIInput | undefined
+  armed: boolean = false
 
   updateRules() {
     addRule({
@@ -43,7 +45,7 @@ export class Track {
   }
 
   setOutput(outputId: string) {
-    const found = midiStore.outputs.find((x) => x.id === outputId)
+    const found = Context.get().midi.outputs.find((x) => x.id === outputId)
     this.output = found
     this.updateRules()
   }
@@ -57,8 +59,15 @@ export class Track {
   }
 
   setInput(inputId: string) {
-    const found = midiStore.inputs.find((x) => x.id === inputId)
+    const found = Context.get().midi.inputs.find((x) => x.id === inputId)
     this.input = found
     this.updateRules()
+  }
+
+  record(data: Uint8Array) {
+    const channel = getChannel(data[0])
+    if (this.inChannel === channel) {
+      this.pattern.record(data)
+    }
   }
 }

@@ -90,3 +90,18 @@ select, input {
   height: 2em;
   cursor: pointer;
 }
+
+.grid-container {
+  display: flex;
+  border: 2px solid #444;
+  overflow: hidden;
+}
+
+.track-controls {
+  display: flex;
+}
+
+.track-controls > * {
+  padding: 0.5rem;
+  border: 2px solid #444;
+}

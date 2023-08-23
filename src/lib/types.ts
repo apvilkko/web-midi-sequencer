@@ -10,3 +10,7 @@ export type MusicalEvent = {
   velocity: number
   id: number
 }
+
+export enum NoteLength {
+  SIXTEENTH,
+}
